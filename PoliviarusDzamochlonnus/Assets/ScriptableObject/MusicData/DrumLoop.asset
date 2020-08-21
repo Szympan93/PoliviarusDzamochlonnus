@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32886f2588af10b4196fd7f504d13bc4, type: 3}
+  m_Name: DrumLoop
+  m_EditorClassIdentifier: 
+  _i1:
+  - {fileID: 8300000, guid: f1d48168eb2f54b4faf6c39af200d973, type: 3}
+  _i2:
+  - {fileID: 8300000, guid: a82f4038e6724c04882874c1d9fbc58d, type: 3}
+  _i3:
+  - {fileID: 8300000, guid: 6f28981ffdd9dfb4caf7f860d44ed42c, type: 3}
+  _stateTacts: 10000000180000001c000000

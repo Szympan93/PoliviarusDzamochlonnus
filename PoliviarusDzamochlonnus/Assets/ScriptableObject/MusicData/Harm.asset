@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32886f2588af10b4196fd7f504d13bc4, type: 3}
+  m_Name: Harm
+  m_EditorClassIdentifier: 
+  _i1:
+  - {fileID: 8300000, guid: 423e7003d1483d046a807ed02cc48b1c, type: 3}
+  - {fileID: 8300000, guid: 7a19add60ad53084d862c5b90df19268, type: 3}
+  - {fileID: 8300000, guid: c16b83f14e25da6458d7b33689ba75f8, type: 3}
+  _i2:
+  - {fileID: 8300000, guid: b752a342a9ff0334f93b43f90e6671f5, type: 3}
+  - {fileID: 8300000, guid: 984fad9e6ca01254e959598b97b3f439, type: 3}
+  - {fileID: 8300000, guid: 38d1c8dbeddcbf04dbc2ca0dcfe25bf4, type: 3}
+  - {fileID: 8300000, guid: b2926009605cc854a818c496234c8c65, type: 3}
+  - {fileID: 8300000, guid: 55e316a0861c30e47a4048ee72f83ba2, type: 3}
+  _i3:
+  - {fileID: 8300000, guid: d1145656d3348a442aa2835da9c6775f, type: 3}
+  - {fileID: 8300000, guid: 5e8d43ed17ff7784eb3be707380be817, type: 3}
+  - {fileID: 8300000, guid: 50e6cdaadb461474297ac1b898595494, type: 3}
+  _stateTacts: 040000000400000004000000
