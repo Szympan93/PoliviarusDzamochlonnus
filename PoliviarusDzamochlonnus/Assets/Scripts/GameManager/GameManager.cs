@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum ActualLeader
 {
@@ -42,7 +43,6 @@ public class GameManager : MonoBehaviour
             if (_currentMusicState == value) return;
             _currentMusicState = value;
 
-            //MusicManager.LayerManager.CanStartLayers = false;
             MusicManager.OnMusicStateChange.AddListener(MusicManager.LayerManager.MuteLayers);
             MusicManager.OnMusicStateChange.Invoke(_currentMusicState);
         }
@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour
             {
                 Debug.Log($"Winner: {System.Enum.GetName(typeof(ActualLeader), CurrentActualLeader)}");
                 MusicManager.CityLoop.Stop();
-                CurrentMusicState = MusicState.Win;
+                SceneManager.LoadScene("Winner");
             }
         }
     }
@@ -88,11 +88,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        MenuSetup();
-    }
-
     private void Update()
     {
         // for testing change current leader Red <-> Blue
@@ -102,9 +97,8 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Non-Unity methods
-    private void MenuSetup()
-    {
-        IsGameEnd = false;
+    public void MenuSetup()
+    {   
         MusicManager = GetComponentInChildren<MusicManager>();
         if(MusicManager is object)
         {
@@ -117,6 +111,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        IsGameEnd = false;
         MusicManager.LayerManager.StartGameplay = true;
         CurrentMusicState = MusicState.I1;
     }
