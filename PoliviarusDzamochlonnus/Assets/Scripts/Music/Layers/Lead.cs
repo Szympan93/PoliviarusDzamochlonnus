@@ -14,11 +14,11 @@ namespace Music.Layer
 
         public ActualLeader CurrentActualLeader
         {
-            get => _musicManager.CurrentActualLeader;
+            get => GameManager.Instance.CurrentActualLeader;
         }
         public MusicState CurrentMusicState
         {
-            get => _musicManager.CurrentMusicState;
+            get => GameManager.Instance.CurrentMusicState;
         }
 
         #region Non-Unity Methods
@@ -38,11 +38,11 @@ namespace Music.Layer
         {
             yield return new WaitUntil(() => CanStart);
 
-            while (!_musicManager.IsGameEnd)
+            while (!GameManager.Instance.IsGameEnd)
             {
                 for (int i = 0; i < AmountAudioSources; i++)
                 {
-                    if (_musicManager.IsGameEnd) break;
+                    if (GameManager.Instance.IsGameEnd) break;
                     SetupClips(state);
                     var clip = ChooseRandomClip(Clips);
                     SetupAmountTact(state, clip);

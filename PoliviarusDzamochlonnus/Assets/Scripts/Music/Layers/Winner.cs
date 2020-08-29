@@ -8,28 +8,29 @@ namespace Music.Layer
     {
         public ActualLeader CurrentActualLeader
         {
-            get => _musicManager.CurrentActualLeader;
+            get => GameManager.Instance.CurrentActualLeader;
         }
         protected override bool CanStart
         {
-            get => _musicManager.IsGameEnd;
+            get => GameManager.Instance.IsGameEnd;
         }
 
         #region Non-Unity Methods
         protected override IEnumerator LayerOrganizer(MusicState state)
         {
-            yield return new WaitUntil(() => CanStart);
-
-            SetupAmountTact(CurrentActualLeader);
-            SetupClips(CurrentActualLeader);
-            var clip = ChooseRandomClip(Clips);
-
-            for (int i = 0; i < AmountAudioSources; i++)
+            if (state == MusicState.Win)
             {
-                StartCoroutine(AudioSourceOrganizer(i, clip));
-                yield return new WaitForSeconds(Timer);
+                SetupAmountTact(CurrentActualLeader);
+                SetupClips(CurrentActualLeader);
+                var clip = ChooseRandomClip(Clips);
+
+                for (int i = 0; i < AmountAudioSources; i++)
+                {
+                    StartCoroutine(AudioSourceOrganizer(i, clip));
+                    yield return new WaitForSeconds(Timer);
+                }
+                _musicManager.LayerManager.CanEndGameStart = true;
             }
-            _musicManager.LayerManager.CanEndGameStart = true;
         }
         #endregion
     }

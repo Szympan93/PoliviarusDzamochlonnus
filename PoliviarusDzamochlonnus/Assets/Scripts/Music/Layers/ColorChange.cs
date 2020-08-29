@@ -15,19 +15,19 @@ namespace Music.Layer
         #region Non-Unity Methods
         protected override IEnumerator LayerOrganizer(MusicState state)
         {
-            yield return new WaitUntil(() => CanStart);
+            if (state == MusicState.Menu || state == MusicState.Win) yield break;
 
             SetupAmountTact(state);
             SetupClips(state);
             var clip = ChooseRandomClip(Clips);
 
-            while (!_musicManager.IsGameEnd)
+            while (!GameManager.Instance.IsGameEnd)
             {
                 yield return new WaitUntil(() => IsLeaderChange);
 
                 for (int i = 0; i < AmountAudioSources; i++)
                 {
-                    if (_musicManager.IsGameEnd) break;
+                    if (GameManager.Instance.IsGameEnd) break;
                     StartCoroutine(AudioSourceOrganizer(i, clip));
                     yield return new WaitForSeconds(Timer);
                 }

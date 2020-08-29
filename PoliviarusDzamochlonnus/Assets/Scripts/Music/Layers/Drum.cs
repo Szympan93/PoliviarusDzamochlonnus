@@ -15,11 +15,11 @@ namespace Music.Layer
             SetupClips(state);
             var clip = ChooseRandomClip(Clips);
 
-            while (!_musicManager.IsGameEnd)
+            while (!GameManager.Instance.IsGameEnd)
             {
                 for (int i = 0; i < AmountAudioSources; i++)
                 {
-                    if (_musicManager.IsGameEnd) break;
+                    if (GameManager.Instance.IsGameEnd) break;
                     StartCoroutine(AudioSourceOrganizer(i, clip));
                     yield return new WaitForSeconds(Timer);
                 }

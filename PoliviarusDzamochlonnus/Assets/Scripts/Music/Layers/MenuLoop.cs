@@ -8,28 +8,31 @@ namespace Music.Layer
     {
         protected override bool CanStart
         {
-            get => _musicManager.LayerManager.CanEndMenuLoop;
+            get => _musicManager.LayerManager.StartGameplay;
         }
 
         #region Non-Unity Methods
         protected override IEnumerator LayerOrganizer(MusicState state)
         {
-            SetupAmountTact();
-            SetupClips();
-            var clip = ChooseRandomClip(Clips);
-
-            while (!CanStart)
+            if(state == MusicState.Menu)
             {
-                for (int i = 0; i < AmountAudioSources; i++)
+                SetupAmountTact();
+                SetupClips();
+                var clip = ChooseRandomClip(Clips);
+
+                while (!CanStart)
                 {
-                    if (CanStart) break;
-                    StartCoroutine(AudioSourceOrganizer(i, clip));
-                    float elapsedTime = 0f;
-                    while (elapsedTime < Timer)
+                    for (int i = 0; i < AmountAudioSources; i++)
                     {
-                        elapsedTime += Time.deltaTime;
                         if (CanStart) break;
-                        yield return null;
+                        StartCoroutine(AudioSourceOrganizer(i, clip));
+                        float elapsedTime = 0f;
+                        while (elapsedTime < Timer)
+                        {
+                            elapsedTime += Time.deltaTime;
+                            if (CanStart) break;
+                            yield return null;
+                        }
                     }
                 }
             }

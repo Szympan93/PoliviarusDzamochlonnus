@@ -32,6 +32,7 @@ namespace Music.Settings
         #region Unity Method
         protected void Awake()
         {
+
             _musicSettings = GetComponent<MusicSettings>();
             if (_musicSettings is null)
                 Debug.LogError(string.Format($"{0}: The MusicSettings didn't set well.", gameObject.name));

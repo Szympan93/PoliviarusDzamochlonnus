@@ -20,7 +20,7 @@ namespace Music.Layer
                 SetupClips();
                 var clip = ChooseRandomClip(Clips);
 
-                while(!_musicManager.IsGameEnd)
+                while(!GameManager.Instance.IsGameEnd)
                 {
                     yield return new WaitUntil(() => CanStart);
 
@@ -29,6 +29,7 @@ namespace Music.Layer
                         StartCoroutine(AudioSourceOrganizer(i, clip));
                         yield return new WaitForSeconds(Timer);
                     }
+                    CanStart = false;
                 }
             }
         }

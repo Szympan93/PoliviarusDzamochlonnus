@@ -11,7 +11,7 @@ namespace Music.Layer
         private bool IsStinger { get; set; }
         protected override bool CanStart
         {
-            get => _musicManager.LayerManager.CanEndMenuLoop;
+            get => _musicManager.LayerManager.StartGameplay;
         }
         #endregion
 
@@ -25,12 +25,12 @@ namespace Music.Layer
 
         protected override IEnumerator LayerOrganizer(MusicState state)
         {
+            if (state == MusicState.Menu || state == MusicState.Win) yield break;
+
             _musicManager.LayerManager.CanStartLayers = false;
             SetupAmountTact(state);
             SetupClips(state);
             var clip = ChooseRandomClip(Clips);
-
-            yield return new WaitUntil(() => CanStart);
 
             if (state != MusicState.I1)
                 StartCoroutine(StingerOrganizer());

@@ -1,36 +1,62 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
 public class Timer : MonoBehaviour
 {
+    #region Variables
     [SerializeField] private TextMeshProUGUI timerTMPro;
-    //czas w sekundach
-    [SerializeField] private int gameTime;
-    private int _totalTime;
+    [SerializeField] private readonly int gameTime = 1 * 60;     //czas w sekundach
+    #endregion
 
-    public int TotalTime { get => _totalTime; }
+    #region Fields
+    private int TotalTime { get; set; }
+    private bool TikTokSound { get => TotalTime == 30 || TotalTime == 10; }
+    #endregion
 
-    void SetTimer() 
+    #region Unity methods
+    private void Start()
     {
-        timerTMPro.text = $"{_totalTime / 60:00}:{_totalTime % 60:00}";
+        StartTimer();
     }
 
-    void Start()
+    private void Update()
     {
-        _totalTime = gameTime;
-        StartCoroutine(StartCountdown());
+        GameStatusDependendOnTime();
+        GameManager.Instance.MusicManager.CanTikTok = TikTokSound;
+    }
+    #endregion
+
+    #region Non-Unity methods
+    private void GameStatusDependendOnTime()
+    {
+        if (TotalTime == gameTime - GameManager.Instance.MusicStateDuration[(int)MusicState.I1])
+            GameManager.Instance.CurrentMusicState = MusicState.I2;
+        else if (TotalTime == gameTime - (GameManager.Instance.MusicStateDuration[(int)MusicState.I1] + GameManager.Instance.MusicStateDuration[(int)MusicState.I2]))
+            GameManager.Instance.CurrentMusicState = MusicState.I3;
+        else if (TotalTime == 0)
+            GameManager.Instance.IsGameEnd = true;
     }
 
-     public IEnumerator StartCountdown() 
+    private void SetTimerText()
     {
-        while(_totalTime >= 0) 
+        timerTMPro.text = $"{TotalTime / 60:00}:{TotalTime % 60:00}";
+    }
+
+    private IEnumerator StartCountdown()
+    {
+        while(TotalTime >= 0)
         {
-            SetTimer();
+            SetTimerText();
             yield return new WaitForSeconds(1.0f);
-            _totalTime--;
+            TotalTime--;
         }
     }
 
+    public void StartTimer()
+    {
+        TotalTime = gameTime;
+        StartCoroutine(StartCountdown());
+    }
+    #endregion
 }

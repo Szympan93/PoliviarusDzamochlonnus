@@ -6,5 +6,9 @@ using UnityEngine.UI;
 
 public class PlayButton : MonoBehaviour
 {
-    void Start() => GetComponent<Button>().onClick.AddListener(()=>SceneManager.LoadScene(1));
+    void Start()
+    {
+        GetComponent<Button>().onClick.AddListener(() => SceneManager.LoadScene(1));
+        GetComponent<Button>().onClick.AddListener(() => GameManager.Instance.StartGame());
+    }
 }

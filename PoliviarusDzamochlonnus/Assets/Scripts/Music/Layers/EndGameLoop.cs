@@ -14,18 +14,21 @@ namespace Music.Layer
         #region Non-Unity Methods
         protected override IEnumerator LayerOrganizer(MusicState state)
         {
-            yield return new WaitUntil(() => CanStart);
-
-            SetupAmountTact();
-            SetupClips();
-            var clip = ChooseRandomClip(Clips);
-
-            while (true)
+            if (state == MusicState.Win)
             {
-                for (int i = 0; i < AmountAudioSources; i++)
+                yield return new WaitUntil(() => CanStart);
+
+                SetupAmountTact();
+                SetupClips();
+                var clip = ChooseRandomClip(Clips);
+
+                while (true)
                 {
-                    StartCoroutine(AudioSourceOrganizer(i, clip));
-                    yield return new WaitForSeconds(Timer);
+                    for (int i = 0; i < AmountAudioSources; i++)
+                    {
+                        StartCoroutine(AudioSourceOrganizer(i, clip));
+                        yield return new WaitForSeconds(Timer);
+                    }
                 }
             }
         }

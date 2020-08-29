@@ -9,12 +9,12 @@ namespace Music
     public class LayerManager : MonoBehaviour
     {
         #region Fields
+        public List<ILayer> MusicLayers { get; private set; }
         public bool IsCurrentLeaderChange { get; set; }
-        public bool CanEndMenuLoop { get; set; }
+        public bool StartGameplay { get; set; }
         public bool CanStartLayers { get; set; }
         public bool CanEndGameStart { get; set; }
         public bool CanEndGameLoop { get; set; }
-        public List<ILayer> MusicLayers { get; private set; }
         #endregion
 
         #region Unity methods
@@ -28,26 +28,16 @@ namespace Music
         public void SetupLayerState()
         {
             IsCurrentLeaderChange = false;
-            CanEndMenuLoop = false;
-            CanStartLayers = false;
+            StartGameplay = false;
             CanEndGameStart = false;
             CanEndGameLoop = false;
         }
 
-        public void StartMenuLoop()
-        {
-            foreach (var layer in MusicLayers)
-            {
-                if (layer is MenuLoop)
-                    layer.StartPlayingMusic();
-            }
-        }
-
         public void StartLayers(MusicState state)
         {
+            CanStartLayers = false;
             foreach (var layer in MusicLayers)
             {
-                if (layer is MenuLoop) continue;
                 layer.StartPlayingMusic(state);
             }
         }
@@ -57,11 +47,13 @@ namespace Music
             foreach (var layer in MusicLayers)
             {
                 if (layer is StartGame) continue;
+                if (layer is Winner) continue;
+                if (layer is ColorChange) continue;
                 layer.MutePlayingMusic();
             }
         }
 
-        public void StopLayers(MusicState state)
+        public void StopLayers()
         {
             foreach (var layer in MusicLayers)
             {

@@ -17,7 +17,7 @@ namespace Music.Layer
         {
             yield return new WaitUntil(() => CanStart);
 
-            while (!_musicManager.IsGameEnd)
+            while (!GameManager.Instance.IsGameEnd)
             {
                 SetupAmountTact(state);
                 SetupClips(state);
@@ -28,7 +28,7 @@ namespace Music.Layer
                 {
                     for (int i = 0; i < AmountAudioSources; i++)
                     {
-                        if (_musicManager.IsGameEnd) break;
+                        if (GameManager.Instance.IsGameEnd) break;
                         var clip = ChooseRandomClip(Clips);
                         StartCoroutine(AudioSourceOrganizer(i, clip));
                         yield return new WaitForSeconds(Timer);
