@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/Levels/Gameplay.unity
     guid: 4f06645c7a500e4489eb176aa74abe3c
+  - enabled: 1
+    path: Assets/_Scenes/WinnerMenu.unity
+    guid: 95f45736a9bd85c449e16f4c0a688426
   m_configObjects: {}
