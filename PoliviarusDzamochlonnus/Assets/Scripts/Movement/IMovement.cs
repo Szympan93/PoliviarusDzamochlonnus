@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IPlayerMovement
+public interface IMovement
 {
     void Move(float distance);
     void Rotate(float angle);

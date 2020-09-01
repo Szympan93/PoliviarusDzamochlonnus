@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TransformMovement : MonoBehaviour, IPlayerMovement
+public class TransformMovement : MonoBehaviour, IMovement
 {
     public void Move(float distance)
     {

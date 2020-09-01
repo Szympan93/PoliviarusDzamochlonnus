@@ -4,11 +4,12 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class NavmeshMovement : MonoBehaviour, IPlayerMovement
+public class NavmeshMovement : MonoBehaviour, IMovement
 {
     private NavMeshAgent _agent;
+    public NavMeshAgent Agent { get => _agent; }
 
-    protected void Start()
+    protected void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
     }
